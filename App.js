@@ -10,7 +10,7 @@ const App = () => {
 
   const handleLogin = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, "aliciiaamorim2612@gmail.com", "amorinha1912x");
+      const userCredential = await signInWithEmailAndPassword(auth, login, senha);
       setUser(userCredential.user);
       console.log(userCredential.user);
     } catch (error) {
