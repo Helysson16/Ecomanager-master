@@ -8,8 +8,8 @@ const IntroScreen = ({ navigation }) => {
       <Text style={styles.title}>EcoManager</Text>
       <Text style={styles.subtitle}>Economize energia</Text>
       <View style={styles.buttons}>
-        <Button title="Login" onPress={() => navigation.navigate('Login')} />
-        <Button title="Registrar" onPress={() => navigation.navigate('Register')} />
+        <Button title="Login" onPress={() => navigation.navigate('login')} />
+        <Button title="Registrar" onPress={() => navigation.navigate('register')} />
       </View>
     </View>
   );

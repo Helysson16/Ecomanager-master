@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
-import { auth } from './firebaseConfig'; // Supondo que o firebaseConfig está configurado
-import { createUserWithEmailAndPassword } from './firebaseConfig';
+import { auth } from '../firebaseConfig'; // Supondo que o firebaseConfig está configurado
+import { createUserWithEmailAndPassword } from '../firebaseConfig';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
