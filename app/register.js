@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { auth } from '../firebaseConfig'; // Supondo que o firebaseConfig está configurado
-import { createUserWithEmailAndPassword } from '../firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'expo-router';
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({navigate}) => {
+  const router = useRouter()
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -11,7 +13,7 @@ const RegisterScreen = ({ navigation }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
       console.log('Usuário registrado:', userCredential.user);
-      navigation.navigate('Home');
+      router.navigate('home');
     } catch (error) {
       console.error(error.message);
       alert('Erro ao registrar');

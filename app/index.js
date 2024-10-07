@@ -1,15 +1,29 @@
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import { View, Text, Button, Image, StyleSheet, Pressable } from 'react-native';
+import { useRouter } from "expo-router"
 
-const IntroScreen = ({ navigation }) => {
+const IntroScreen = ({ }) => {
+  const router = useRouter()
+
+  const irParaLogin = () => {
+    router.navigate("/login")
+  }
+  const irPararegistrar = () => {
+    router.navigate("/register")
+  }
   return (
     <View style={styles.container}>
-
+      <Image source={require('../img/logo.png')} style={styles.logo} />
       <Text style={styles.title}>EcoManager</Text>
       <Text style={styles.subtitle}>Economize energia</Text>
+
       <View style={styles.buttons}>
-        <Button title="Login" onPress={() => navigation.navigate('login')} />
-        <Button title="Registrar" onPress={() => navigation.navigate('register')} />
+        <Pressable onPress={irParaLogin}>
+          <Text>Login</Text>
+        </Pressable>
+        <Pressable onPress={irPararegistrar}>
+          <Text >registrar</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -23,8 +37,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 250,
+    height: 250,
+    resizeMode: 'contain',
+    backgroundColor: "#39CB3F",
     marginBottom: 16,
   },
   title: {
