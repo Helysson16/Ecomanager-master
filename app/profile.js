@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',
-  },
+        
+ },
   infoText: {
     fontSize: 16,
     color: '#555',

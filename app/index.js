@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, Button} from 'react-native';
 import { useRouter } from "expo-router"
 
 const IntroScreen = ({ }) => {
@@ -18,12 +18,8 @@ const IntroScreen = ({ }) => {
       <Text style={styles.subtitle}>Economize energia</Text>
 
       <View style={styles.buttons}>
-        <Pressable onPress={irParaLogin}>
-          <Text>Login</Text>
-        </Pressable>
-        <Pressable onPress={irPararegistrar}>
-          <Text >registrar</Text>
-        </Pressable>
+        <Button title="login" onPress={irParaLogin}></Button>
+        <Button title="Resgistrar" onPress={irPararegistrar}></Button>
       </View>
     </View>
   );

@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React from 'react';
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, View, Button } from 'react-native';
 
 
 export default function HomeScreen() {
@@ -25,7 +25,7 @@ export default function HomeScreen() {
           style={styles.profileImage}
         />
         <Text style={styles.welcomeText}>Olá Helysson,</Text>
-        <Text style={styles.subtitle}>Bem vindo de volta</Text>
+        <Text style={styles.subtitle}> Bem vindo de volta</Text>
       </View>
 
       <View style={styles.goalContainer}>
@@ -51,10 +51,11 @@ export default function HomeScreen() {
         <Text style={styles.activityDetail}>Mensagem respondida</Text>
         <Text style={styles.activityFriend}>Rilary</Text>
       </View>
-      <Pressable onPress={irParaProfile}>
-        <Text >registrar</Text>
-      </Pressable>
-
+     
+      <View>
+        <Button title="Relatório" onPress={irParaProfile}></Button>
+      </View>
+    
     </View>
 
 
@@ -121,6 +122,8 @@ const styles = StyleSheet.create({
   },
   activityContainer: {
     marginTop: 20,
+    marginBottom: 20,
+    justifyContent: 'center',
   },
   activityTitle: {
     fontSize: 16,
