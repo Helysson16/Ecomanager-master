@@ -5,6 +5,11 @@ import { FlatList, Image, StyleSheet, Text, View, Button } from 'react-native';
 
 export default function HomeScreen() {
   const router = useRouter()
+  
+  const irParaChat = () => {
+    router.navigate("/chat");
+  };
+  
 
   const irParaProfile = () => {
     router.navigate("/profile")
@@ -52,11 +57,19 @@ export default function HomeScreen() {
         <Text style={styles.activityFriend}>Rilary</Text>
       </View>
      
+    
+     
+          
       <View>
-        <Button title="Relatório" onPress={irParaProfile}></Button>
-      </View>
+        <Button title="Relatório" onPress={irParaProfile} />
+        <View style={{ marginBottom: 10 }} />
+        <Button title="Chat com Administradores" onPress={irParaChat} />
+     </View>
+
+
     
     </View>
+    
 
 
   );

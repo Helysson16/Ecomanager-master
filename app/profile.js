@@ -52,13 +52,14 @@ export default function ProfileScreen() {
         <Text style={styles.consumptionValue}>{currentConsumption}</Text>
       </View>
 
-      {/* Navegação inferior (ícones placeholders por enquanto) */}
+      {/* Navegação inferior (ícones placeholders por enquanto)
       <View style={styles.footer}>
         <View style={styles.iconPlaceholder}></View>
         <View style={styles.iconPlaceholder}></View>
         <View style={styles.iconPlaceholder}></View>
-      </View>
+      </View> */}
     </View>
+  
   );
 }
 
@@ -112,7 +113,9 @@ const styles = StyleSheet.create({
   },
   monthsList: {
     marginBottom: 20,
-  },
+    padding: 10,
+    fontSize: 10,
+   },
   monthItem: {
     padding: 10,
     marginHorizontal: 5,
