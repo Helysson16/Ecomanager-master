@@ -11,12 +11,15 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+      
+      
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.Ecomanager"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,12 +34,17 @@
     "plugins": [
       "expo-router"
     ],
-    "expo": {
-      "newArchEnabled": true
+    "newArchEnabled": true
+    
+     
+    
+    
+  },
+  "doctor": {
+    "reactNativeDirectoryCheck": {
+      "listUnknownPackages": false
     }
-  }
   
   
-
-
+}
 }
