@@ -13,13 +13,13 @@ const IntroScreen = ({ }) => {
   }
   return (
     <View style={styles.container}>
-      <Image source={require('../img/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/logo.png')} style={styles.logo} />
       <Text style={styles.title}>EcoManager</Text>
       <Text style={styles.subtitle}>Economize energia</Text>
 
       <View style={styles.buttons}>
         <Button title="login" onPress={irParaLogin}></Button>
-        <Button title="Resgistrar" onPress={irPararegistrar}></Button>
+        <Button title="Registrar" onPress={irPararegistrar}></Button>
       </View>
     </View>
   );

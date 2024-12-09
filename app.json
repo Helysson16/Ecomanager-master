@@ -30,7 +30,13 @@
     },
     "plugins": [
       "expo-router"
-    ]
-    
+    ],
+    "expo": {
+      "newArchEnabled": true
+    }
   }
+  
+  
+
+
 }
