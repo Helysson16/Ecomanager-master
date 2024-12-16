@@ -2,29 +2,27 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { auth } from '../firebaseConfig.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { router, useRouter } from "expo-router";
+import { useRouter } from 'expo-router';
 
-
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
-  
+  const router = useRouter();
 
-  
   const handleLogin = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, login, senha);
       console.log('Usuário logado:', userCredential.user);
-      router.navigate('home');
+      router.push('/home'); // Redireciona para a tela "home"
     } catch (error) {
       console.error(error.message);
-      alert('Erro ao fazer login');
+      alert(error.message); // Exibe a mensagem de erro para o usuário
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bem vindo de volta</Text>
+      <Text style={styles.title}>Bem-vindo de volta</Text>
       <TextInput
         style={styles.input}
         placeholder="Email ou Telefone"

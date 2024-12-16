@@ -4,8 +4,8 @@ import { auth } from '../firebaseConfig'; // Supondo que o firebaseConfig está 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'expo-router';
 
-const RegisterScreen = ({navigate}) => {
-  const router = useRouter()
+const RegisterScreen = () => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -13,7 +13,7 @@ const RegisterScreen = ({navigate}) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
       console.log('Usuário registrado:', userCredential.user);
-      router.navigate('home');
+      router.navigate('home'); // Redireciona para a tela inicial após o registro
     } catch (error) {
       console.error(error.message);
       alert('Erro ao registrar');
@@ -56,3 +56,5 @@ const styles = StyleSheet.create({
 });
 
 export default RegisterScreen;
+
+

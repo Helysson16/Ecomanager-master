@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Button} from 'react-native';
-import { useRouter } from "expo-router"
+import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { useRouter } from 'expo-router';
 
-const IntroScreen = ({ }) => {
-  const router = useRouter()
+const IntroScreen = () => {
+  const router = useRouter();
 
   const irParaLogin = () => {
-    router.navigate("/login")
-  }
-  const irPararegistrar = () => {
-    router.navigate("/register")
-  }
+    router.navigate('/login');
+  };
+
+  const irParaRegistrar = () => {
+    router.navigate('/register');
+  };
+
   return (
     <View style={styles.container}>
       <Image source={require('../assets/logo.png')} style={styles.logo} />
@@ -18,8 +20,8 @@ const IntroScreen = ({ }) => {
       <Text style={styles.subtitle}>Economize energia</Text>
 
       <View style={styles.buttons}>
-        <Button title="login" onPress={irParaLogin}></Button>
-        <Button title="Registrar" onPress={irPararegistrar}></Button>
+        <Button title="Login" onPress={irParaLogin} />
+        <Button title="Registrar" onPress={irParaRegistrar} />
       </View>
     </View>
   );
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     resizeMode: 'contain',
-    backgroundColor: "#39CB3F",
+    backgroundColor: '#39CB3F',
     marginBottom: 16,
   },
   title: {

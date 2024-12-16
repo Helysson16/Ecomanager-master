@@ -11,7 +11,7 @@ export default function ProfileScreen() {
       <View style={styles.header}>
         <View style={styles.profileContainer}>
           <Image
-            source={require('../assets/profile.png') } 
+            source={require('../assets/profile.png')}
             style={styles.profileImage}
           />
           <Text style={styles.name}>Helysson Daniel</Text>
@@ -52,14 +52,15 @@ export default function ProfileScreen() {
         <Text style={styles.consumptionValue}>{currentConsumption}</Text>
       </View>
 
-      {/* Navegação inferior (ícones placeholders por enquanto)
+      {/* Rodapé com ícones placeholders (comentado, mas agora com visibilidade aprimorada) */}
+      {/* 
       <View style={styles.footer}>
         <View style={styles.iconPlaceholder}></View>
         <View style={styles.iconPlaceholder}></View>
         <View style={styles.iconPlaceholder}></View>
-      </View> */}
+      </View> 
+      */}
     </View>
-  
   );
 }
 
@@ -101,8 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',
-        
- },
+  },
   infoText: {
     fontSize: 16,
     color: '#555',
@@ -113,21 +113,25 @@ const styles = StyleSheet.create({
   },
   monthsList: {
     marginBottom: 20,
-    padding: 10,
-    fontSize: 10,
-   },
+    paddingVertical: 5,
+  },
   monthItem: {
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     marginHorizontal: 5,
-    backgroundColor: '#ccc',
-    borderRadius: 10,
+    backgroundColor: '#4caf50',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   monthText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#fff',
   },
   consumptionContainer: {
     alignItems: 'center',
+    marginBottom: 30,
   },
   consumptionLabel: {
     fontSize: 16,

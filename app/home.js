@@ -1,19 +1,17 @@
-import { useRouter } from "expo-router";
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, View, Button } from 'react-native';
 
-
 export default function HomeScreen() {
-  const router = useRouter()
-  
+  const router = useRouter();
+
   const irParaChat = () => {
-    router.navigate("/chat");
+    router.navigate('/chat');
   };
-  
 
   const irParaProfile = () => {
-    router.navigate("/profile")
-  }
+    router.navigate('/profile');
+  };
 
   const friends = [
     { id: '1', name: 'Rilary', image: require('../assets/rilary.jpeg') },
@@ -25,12 +23,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image
-          source={require('../assets/profile.png')}
-          style={styles.profileImage}
-        />
+        <Image source={require('../assets/profile.png')} style={styles.profileImage} />
         <Text style={styles.welcomeText}>Olá Helysson,</Text>
-        <Text style={styles.subtitle}> Bem vindo de volta</Text>
+        <Text style={styles.subtitle}>Bem-vindo de volta</Text>
       </View>
 
       <View style={styles.goalContainer}>
@@ -56,24 +51,14 @@ export default function HomeScreen() {
         <Text style={styles.activityDetail}>Mensagem respondida</Text>
         <Text style={styles.activityFriend}>Rilary</Text>
       </View>
-     
-    
-     
-          
+
       <View>
         <Button title="Relatório" onPress={irParaProfile} />
         <View style={{ marginBottom: 10 }} />
         <Button title="Chat com Administradores" onPress={irParaChat} />
-     </View>
-
-
-    
+      </View>
     </View>
-    
-
-
   );
-
 }
 
 const styles = StyleSheet.create({
