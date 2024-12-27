@@ -11,8 +11,6 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-      
-      
     },
     "assetBundlePatterns": [
       "**/*"
@@ -35,16 +33,5 @@
       "expo-router"
     ],
     "newArchEnabled": true
-    
-     
-    
-    
-  },
-  "doctor": {
-    "reactNativeDirectoryCheck": {
-      "listUnknownPackages": false
-    }
-  
-  
-}
+  }
 }

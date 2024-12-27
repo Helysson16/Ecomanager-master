@@ -1,63 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TextInput, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { db } from '../firebaseConfig'; // Importe a configuração do Firebase
+import { db } from '../firebaseConfig';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 export default function ProfileScreen() {
   const months = [
-    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez',
   ];
 
-  const [consumptionData, setConsumptionData] = useState({
-    Jan: '',
-    Fev: '',
-    Mar: '',
-    Abr: '',
-    Mai: '',
-    Jun: '',
-    Jul: '',
-    Ago: '',
-    Set: '',
-    Out: '',
-    Nov: '',
-    Dez: ''
-  });
-  
-  const [selectedMonth, setSelectedMonth] = useState('Jan');
+  const [consumptionData, setConsumptionData] = useState({});
+  const [selectedMonths, setSelectedMonths] = useState([]);
   const [newConsumption, setNewConsumption] = useState('');
 
-  // Função para atualizar o consumo no Firestore
+  // Atualiza os meses selecionados
+  const toggleMonthSelection = (month) => {
+    setSelectedMonths((prev) =>
+      prev.includes(month) ? prev.filter((m) => m !== month) : [...prev, month]
+    );
+  };
+
+  // Atualizar consumo de múltiplos meses
   const updateConsumption = async () => {
-    if (newConsumption) {
-      const docRef = doc(db, 'consumptions', 'user1'); // 'user1' é um ID de exemplo
-      await setDoc(docRef, {
-        [selectedMonth]: newConsumption, // Atualiza o consumo do mês selecionado
-      }, { merge: true });
-      setConsumptionData(prevData => ({
-        ...prevData,
-        [selectedMonth]: newConsumption, // Atualiza o estado local
-      }));
+    if (newConsumption && selectedMonths.length > 0) {
+      const updates = selectedMonths.reduce((acc, month) => {
+        acc[month] = newConsumption;
+        return acc;
+      }, {});
+
+      const docRef = doc(db, 'consumptions', 'user1');
+      await setDoc(docRef, updates, { merge: true });
+
+      setConsumptionData((prevData) => ({ ...prevData, ...updates }));
       setNewConsumption('');
+      setSelectedMonths([]);
     }
   };
 
-  // Função para remover o consumo do Firestore
+  // Remover consumo de múltiplos meses
   const removeConsumption = async () => {
-    const docRef = doc(db, 'consumptions', 'user1');
-    await setDoc(docRef, {
-      [selectedMonth]: '', // Remove o consumo do mês selecionado
-    }, { merge: true });
-    setConsumptionData(prevData => ({
-      ...prevData,
-      [selectedMonth]: '', // Atualiza o estado local
-    }));
-    setNewConsumption('');
+    if (selectedMonths.length > 0) {
+      const updates = selectedMonths.reduce((acc, month) => {
+        acc[month] = '';
+        return acc;
+      }, {});
+
+      const docRef = doc(db, 'consumptions', 'user1');
+      await setDoc(docRef, updates, { merge: true });
+
+      setConsumptionData((prevData) =>
+        selectedMonths.reduce((data, month) => {
+          data[month] = '';
+          return data;
+        }, { ...prevData })
+      );
+      setSelectedMonths([]);
+    }
   };
 
-  // Função para carregar os dados do Firestore ao iniciar
   const loadConsumptionData = async () => {
-    const docRef = doc(db, 'consumptions', 'user1'); // 'user1' é o ID de exemplo
+    const docRef = doc(db, 'consumptions', 'user1');
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -66,7 +67,7 @@ export default function ProfileScreen() {
   };
 
   useEffect(() => {
-    loadConsumptionData(); // Carrega os dados quando o componente é montado
+    loadConsumptionData();
   }, []);
 
   return (
@@ -95,25 +96,24 @@ export default function ProfileScreen() {
         </View>
       </View>
 
-      <View style={styles.pickerContainer}>
-        <Text style={styles.pickerLabel}>Selecione o Mês</Text>
-        <Picker
-          selectedValue={selectedMonth}
-          onValueChange={itemValue => setSelectedMonth(itemValue)}
-          style={styles.picker}
-        >
-          {months.map(month => (
-            <Picker.Item key={month} label={month} value={month} />
-          ))}
-        </Picker>
-      </View>
-
-      <View style={styles.consumptionContainer}>
-        <Text style={styles.consumptionLabel}>Consumo de {selectedMonth}</Text>
-        <Text style={styles.consumptionValue}>
-          {consumptionData[selectedMonth] ? `${consumptionData[selectedMonth]} kwh` : 'Não registrado'}
-        </Text>
-      </View>
+      <FlatList
+        data={months}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={[
+              styles.monthItem,
+              selectedMonths.includes(item) && styles.selectedMonth,
+            ]}
+            onPress={() => toggleMonthSelection(item)}
+          >
+            <Text style={styles.monthText}>{item}</Text>
+            <Text style={styles.monthConsumption}>
+              {consumptionData[item] ? `${consumptionData[item]} kWh` : 'Não registrado'}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
 
       <View style={styles.updateContainer}>
         <TextInput
@@ -124,10 +124,10 @@ export default function ProfileScreen() {
           onChangeText={setNewConsumption}
         />
         <TouchableOpacity style={styles.button} onPress={updateConsumption}>
-          <Text style={styles.buttonText}>Atualizar Consumo</Text>
+          <Text style={styles.buttonText}>Atualizar Seleção</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={removeConsumption}>
-          <Text style={styles.buttonText}>Remover Consumo</Text>
+          <Text style={styles.buttonText}>Remover Seleção</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -233,4 +233,27 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-  },});
+  },
+  monthItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 15,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 5,
+  },
+  selectedMonth: {
+    backgroundColor: '#e0f7fa',
+  },
+  monthText: {
+    fontSize: 16,
+    color: '#555',
+  },
+  monthConsumption: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+});
