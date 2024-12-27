@@ -3,7 +3,7 @@ import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { auth } from '../firebaseConfig'; // Supondo que o firebaseConfig está configurado
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'expo-router';
-
+//teste
 const RegisterScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
